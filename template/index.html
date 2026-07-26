@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HPA Experience Engine</title>
+    <link rel="stylesheet" href="hpa-core.css">
+</head>
+<body>
+
+    <!-- Progress Indicator -->
+    <div class="hpa-progress-container">
+        <div class="hpa-progress-bar" id="progressBar"></div>
+    </div>
+
+    <main id="app">
+        <!-- ACT I: THE HOOK -->
+        <section class="scene active" id="scene-1" data-act="1">
+            <div class="scene-content">
+                <span class="badge">ACT I • THE PARADIGM SHIFT</span>
+                <h1>Slides Are Dead. <br><span class="highlight">Long Live SPAs.</span></h1>
+                <p class="subtitle">Press <kbd>→</kbd> or Click Anywhere to Begin the Experience.</p>
+            </div>
+        </section>
+
+        <!-- ACT I: INTERACTIVE PREDICTION -->
+        <section class="scene" id="scene-2" data-act="1">
+            <div class="scene-content">
+                <span class="badge">INTERACTIVE BEAT</span>
+                <h2>Predict Audience Retention</h2>
+                <p>How much information do people retain from traditional slide decks after 24 hours?</p>
+                
+                <div class="interactive-grid">
+                    <button class="guess-btn" data-correct="false">50%</button>
+                    <button class="guess-btn" data-correct="false">30%</button>
+                    <button class="guess-btn" data-correct="true">10%</button>
+                </div>
+                
+                <div class="feedback-box hidden" id="quizFeedback">
+                    <p><strong>Correct!</strong> Studies show traditional slide decks suffer from a 90% drop in retention. Interaction changes the equation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACT II: TRANSFORMATIONAL FLIP CARD -->
+        <section class="scene" id="scene-3" data-act="2">
+            <div class="scene-content">
+                <span class="badge">ACT II • THE ARCHITECTURE</span>
+                <h2>The HPA Primitive: Reversible Thinking</h2>
+                
+                <div class="flip-card" id="card1">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h3>Old Way: Static Bullet Points</h3>
+                            <p>(Click to Transform)</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>HPA Way: Interactive State</h3>
+                            <p>Content transforms based on context and interaction.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Global Navigation Controls -->
+    <nav class="hpa-controls">
+        <button id="prevBtn" aria-label="Previous Scene">←</button>
+        <span id="sceneCounter">1 / 3</span>
+        <button id="nextBtn" aria-label="Next Scene">→</button>
+    </nav>
+
+    <script src="hpa-engine.js"></script>
+</body>
+</html>
