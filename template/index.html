@@ -14,16 +14,16 @@
     </div>
 
     <main id="app">
-        <!-- ACT I: THE HOOK -->
+        <!-- SCENE I: THE HOOK -->
         <section class="scene active" id="scene-1" data-act="1">
             <div class="scene-content">
                 <span class="badge">ACT I • THE PARADIGM SHIFT</span>
                 <h1>Slides Are Dead. <br><span class="highlight">Long Live SPAs.</span></h1>
-                <p class="subtitle">Press <kbd>→</kbd> or Click Anywhere to Begin the Experience.</p>
+                <p class="subtitle">Press <kbd>→</kbd>, <kbd>Enter</kbd>, or Click Anywhere to Begin.</p>
             </div>
         </section>
 
-        <!-- ACT I: INTERACTIVE PREDICTION -->
+        <!-- SCENE II: INTERACTIVE PREDICTION -->
         <section class="scene" id="scene-2" data-act="1">
             <div class="scene-content">
                 <span class="badge">INTERACTIVE BEAT</span>
@@ -37,12 +37,12 @@
                 </div>
                 
                 <div class="feedback-box hidden" id="quizFeedback">
-                    <p><strong>Correct!</strong> Studies show traditional slide decks suffer from a 90% drop in retention. Interaction changes the equation.</p>
+                    <p><strong>Correct!</strong> Traditional slide decks suffer from high drop-offs. Interaction changes the equation.</p>
                 </div>
             </div>
         </section>
 
-        <!-- ACT II: TRANSFORMATIONAL FLIP CARD -->
+        <!-- SCENE III: TRANSFORMATIONAL FLIP CARD -->
         <section class="scene" id="scene-3" data-act="2">
             <div class="scene-content">
                 <span class="badge">ACT II • THE ARCHITECTURE</span>
@@ -71,71 +71,6 @@
         <button id="nextBtn" aria-label="Next Scene">→</button>
     </nav>
 
-    <script src="hpa-engine.js"></script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HPA Presentation</title>
-    <link rel="stylesheet" href="hpa-core.css">
-</head>
-<body>
-    <main class="workflow-container" id="app">
-
-        <!-- Slide 1: Title & Overview -->
-        <section class="slide active" data-step="1">
-            <div class="slide-header">
-                <span class="badge">Architecture</span>
-                <h1>Building Stateful Web Decks</h1>
-            </div>
-            <p class="subtitle">Press <code>Right Arrow</code> or <code>Enter</code> to begin.</p>
-        </section>
-
-        <!-- Slide 2: Interactive State Example -->
-        <section class="slide" data-step="2">
-            <h2>Interactive Input Capture</h2>
-            <div class="content-box">
-                <label for="username-input">Enter your name to persist across slides:</label>
-                <input type="text" id="username-input" placeholder="Type here...">
-            </div>
-            <script>
-                // Register code execution when entering Slide 2
-                window.__addEnterHook(2, (ctx) => {
-                    const input = document.getElementById('username-input');
-                    if (ctx.name) input.value = ctx.name;
-
-                    input.oninput = (e) => {
-                        ctx.name = e.target.value;
-                    };
-                });
-            </script>
-        </section>
-
-        <!-- Slide 3: Consuming Global Context -->
-        <section class="slide" data-step="3">
-            <h2>Dynamic Context Rendering</h2>
-            <div class="content-box">
-                <p id="greeting-output">Hello, traveler.</p>
-            </div>
-            <script>
-                // Render hook dynamically updates UI using global state
-                window.__addRenderHook(3, (ctx) => {
-                    const output = document.getElementById('greeting-output');
-                    if (ctx.name) {
-                        output.textContent = `Welcome aboard, ${ctx.name}! Your state successfully persisted.`;
-                    } else {
-                        output.textContent = `Hello, guest. You didn't enter a name on the previous slide.`;
-                    }
-                });
-            </script>
-        </section>
-
-    </main>
-
-    <script src="hpa-engine.js"></script>
+    <script src="hpa_engine.js"></script>
 </body>
 </html>

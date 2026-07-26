@@ -4,23 +4,39 @@ class HPAEngine {
         this.currentIndex = 0;
         this.progressBar = document.getElementById('progressBar');
         this.counter = document.getElementById('sceneCounter');
+        this.context = {};
         
         this.init();
     }
 
     init() {
+        window.__context = this.context;
         this.bindEvents();
         this.updateState();
     }
 
     bindEvents() {
-        // Keyboard Navigation
+        // Keyboard Navigation (ArrowRight, Space, Enter advance; ArrowLeft goes back)
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'Space') this.next();
-            if (e.key === 'ArrowLeft') this.prev();
+            if (['ArrowRight', 'Space', 'Enter'].includes(e.key)) {
+                e.preventDefault();
+                this.next();
+            }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                this.prev();
+            }
+            if (e.key === 'Home') {
+                e.preventDefault();
+                this.goTo(0);
+            }
+            if (e.key === 'End') {
+                e.preventDefault();
+                this.goTo(this.scenes.length - 1);
+            }
         });
 
-        // UI Controls
+        // UI Controls Navigation
         document.getElementById('nextBtn')?.addEventListener('click', () => this.next());
         document.getElementById('prevBtn')?.addEventListener('click', () => this.prev());
 
@@ -45,8 +61,13 @@ class HPAEngine {
         this.updateState();
     }
 
-    next() { this.goTo(this.currentIndex + 1); }
-    prev() { this.goTo(this.currentIndex - 1); }
+    next() { 
+        this.goTo(this.currentIndex + 1); 
+    }
+    
+    prev() { 
+        this.goTo(this.currentIndex - 1); 
+    }
 
     updateState() {
         // Update Progress Bar
