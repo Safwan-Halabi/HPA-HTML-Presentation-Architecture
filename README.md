@@ -38,7 +38,7 @@ Prompt your AI agent:
 Clone the repository and open `template/index.html` in your browser:
 
 ```bash
-git clone [https://github.com/your-username/html-presentation-architecture.git](https://github.com/your-username/html-presentation-architecture.git)
+git clone https://github.com/Safwan-Halabi/HPA-HTML-Presentation-Architecture.git
 cd html-presentation-architecture/template
 python3 -m http.server 8000
 ```
@@ -49,8 +49,8 @@ python3 -m http.server 8000
 
 ```text
 [Phase 1: Architecture] ➔ [Phase 2: Interaction Map] ➔ [Phase 3: Scene Graph] 
-                                                               📑
-[Phase 5: SPA Implementation]  [Phase 4: Runtime Specs] 
+                                                               
+[Phase 5: SPA Implementation] ➔  [Phase 4: Runtime Specs] ➔ 📑
 ```
 
 1. **Architecture:** Establishing narrative and emotional arcs.
@@ -60,3 +60,7 @@ python3 -m http.server 8000
 5. **Implementation:** Clean HTML, CSS, and JS compilation.
 
 ---
+
+## 📜 License
+
+MIT © Safwan Halabi
