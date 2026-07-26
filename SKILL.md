@@ -65,3 +65,105 @@ When given a request to build an HPA experience, you MUST guide the user through
 ### Phase 5: Implementation
 * Write production-ready HTML5, CSS3, and JavaScript adhering to the HPA template standards.
 * Ensure keyboard navigation (`ArrowRight`, `ArrowLeft`, `Space`) works out of the box.
+
+---
+name: hpa-presentation-architect
+description: An advanced autonomous skill for AI agents to plan, storyboard, and programmatically build zero-build, stateful interactive web presentations with full keyboard navigation and hook-based slide logic.
+---
+
+# SKILL: HTML Presentation Architecture (HPA) Orchestrator
+
+## CORE PHILOSOPHY
+You are an elite UI Engineer and Presentation Designer. When tasked with creating a presentation or interactive walkthrough, you operate in two distinct, mandatory phases:
+1. **The Storyboard Phase (The PowerPoint Mindset):** You plan the narrative arc, slide-by-slide objectives, visual hierarchy, and interactive states *before* writing code.
+2. **The Execution Phase (The Engine & Code):** You implement the architecture using a zero-build, plain HTML/CSS/JS stack with robust keyboard event bindings (`ArrowLeft`, `ArrowRight`, `Enter`) and isolated slide hooks.
+
+---
+
+## PHASE 1: STORYBOARD & PLANNING PROTOCOL
+Before writing a single line of HTML or JavaScript, you must output a structured markdown plan using this exact schema:
+
+*   **Presentation Title:** [Clear, descriptive title]
+*   **Target Audience / Goal:** [What is the primary takeaway or user action?]
+*   **Slide Index & Blueprint:**
+    *   **Slide 1: [Title]**
+        *   *Intent:* [What does this slide achieve?]
+        *   *Visual Layout:* [Columns, cards, code block, hero text, etc.]
+        *   *Interactive State / Data:* [Does it capture input or transition on Enter?]
+    *   **Slide 2: [Title]**
+        *   ...
+
+---
+
+## PHASE 2: TECHNICAL ARCHITECTURE & EVENT HANDLING
+The underlying runtime must handle native browser navigation seamlessly. You will use the standard HPA engine blueprint equipped with global event listeners for presentations.
+
+### Navigation & Keybindings Spec
+*   **`ArrowRight` / `Space` / `Enter`:** Advance to the next slide (capped at total slide count).
+*   **`ArrowLeft`:** Return to the previous slide (floored at slide 1).
+*   **`Home` / `End`:** Jump directly to the first or last slide.
+
+### Core Engine (`hpa-engine.js`)
+```javascript
+class HPAEngine {
+    constructor() {
+        this.currentStep = 1;
+        this.slides = document.querySelectorAll('.slide');
+        this.context = {};
+        this.renderHooks = {};
+        this.enterHooks = {};
+        this.init();
+    }
+
+    init() {
+        // Expose global globals for slide scripts
+        window.__context = this.context;
+        window.__addRenderHook = (step, fn) => { this.renderHooks[step] = fn; };
+        window.__addEnterHook = (step, fn) => { this.enterHooks[step] = fn; };
+
+        // Bind keyboard navigation
+        window.addEventListener('keydown', (e) => this.handleKeyPress(e));
+        this.updateView();
+    }
+
+    handleKeyPress(e) {
+        // Prevent default scrolling behavior for presentation keys
+        if (['ArrowRight', 'ArrowLeft', 'Space', 'Enter'].includes(e.key)) {
+            e.preventDefault();
+        }
+
+        if (e.key === 'ArrowRight' || e.key === 'Enter' || e.key === ' ') {
+            this.goToStep(this.currentStep + 1);
+        } else if (e.key === 'ArrowLeft') {
+            this.goToStep(this.currentStep - 1);
+        } else if (e.key === 'Home') {
+            this.goToStep(1);
+        } else if (e.key === 'End') {
+            this.goToStep(this.slides.length);
+        }
+    }
+
+    goToStep(stepNumber) {
+        if (stepNumber >= 1 && stepNumber <= this.slides.length) {
+            this.currentStep = stepNumber;
+            this.updateView();
+        }
+    }
+
+    updateView() {
+        this.slides.forEach((slide, index) => {
+            const stepNum = index + 1;
+            if (stepNum === this.currentStep) {
+                slide.classList.add('active');
+                if (this.renderHooks[stepNum]) this.renderHooks[stepNum](this.context);
+                if (this.enterHooks[stepNum]) this.enterHooks[stepNum](this.context);
+            } else {
+                slide.classList.remove('active');
+            }
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    window.hpa = new HPAEngine();
+});
